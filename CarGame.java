@@ -110,38 +110,53 @@ public class CarGame {
 			
 			lastLain = startLane.getText();
 			strBuild = new StringBuilder(lastLain);
-			System.out.println(lastLain);
-			if(lastLain.charAt(meLocationIndex - 1) == '^') {
-				System.out.println("die");
-				die = true;
-			}
-			else {
-				if(meLocationIndex > 0) {
+			
+			if(meLocationIndex > 0) {
+				if(lastLain.charAt(meLocationIndex - 1) == '^') {
+					System.out.println("die");
+					die = true;
+				}
+				else {
 					strBuild.setCharAt(meLocationIndex, '-');
 					strBuild.setCharAt(meLocationIndex - 1, '!');
-					System.out.println("strBuild : " + strBuild);
-					
 					meLocationIndex -= 1;
 					startLane.setText(new String(strBuild));
 				}
-			}	
+			}
+			
+//			if(lastLain.charAt(meLocationIndex - 1) == '^') {
+//				System.out.println("die");
+//				die = true;
+//			}
+//			else {
+//				if(meLocationIndex > 0) {
+//					strBuild.setCharAt(meLocationIndex, '-');
+//					strBuild.setCharAt(meLocationIndex - 1, '!');
+//					System.out.println("strBuild : " + strBuild);
+//					
+//					meLocationIndex -= 1;
+//					startLane.setText(new String(strBuild));
+//				}
+//			}	
 		});
 		
 		moveRight.addActionListener(e -> {
 			lastLain = startLane.getText();
 			strBuild = new StringBuilder(lastLain);
-			if(lastLain.charAt(meLocationIndex + 1) == '^') {
-				System.out.println("die");
-				die = true;
-			}
-			else {
-				if(meLocationIndex < lastLain.length()-1) {
+			
+			if(meLocationIndex < lastLain.length() -1) {
+				if(lastLain.charAt(meLocationIndex + 1) == '^') {
+					System.out.println("die");
+					die = true;
+				}
+				else {
 					strBuild.setCharAt(meLocationIndex, '-');
 					strBuild.setCharAt(meLocationIndex + 1, '!');
 					meLocationIndex += 1;
 					startLane.setText(new String(strBuild));
 				}
-			}	
+			}
+			
 		});
 		
 		
@@ -163,7 +178,7 @@ public class CarGame {
 		meLocationIndex = 19;
 		while(true) {
 			System.out.println("meLocationIndex : " + meLocationIndex);
-			 ranNum = (int)(Math.random() * 35);
+			 ranNum = (int)(Math.random() * 36);
 			 newLane = new StringBuilder("------------------------------------");
 			try {
 				Thread.sleep(300 - k);
@@ -212,7 +227,14 @@ public class CarGame {
 			
 			score++;
 			if(k < 250) {
-				k ++;
+				k++;
+			}
+			else if(k == 250) {
+				k--;
+			}
+			
+			if(score == 400) {
+				k = 252;
 			}
 			
 		}
